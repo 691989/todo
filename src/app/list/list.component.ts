@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TodoDataService } from '../service/data/todo-data.service';
 
 export class Todo{
   constructor(
@@ -7,11 +8,8 @@ export class Todo{
     public done : boolean,
     public targetDate : Date
 
-  ){
-
-  }
+  ){ }
 }
-
 
 @Component({
   selector: 'app-list',
@@ -20,28 +18,51 @@ export class Todo{
 })
 export class ListComponent implements OnInit {
 
-    todos = [
-      new Todo(1,'learn to Dance',false,new Date()),
-      new Todo(2,'learn to Code',false,new Date()),
-      new Todo(3,'learn to Ride',false,new Date())
-    ]
+    todos: Todo[]
+    message : string;
 
+    //   new Todo(1,'learn to Dance',false,new Date()),
+    //   new Todo(2,'learn to Code',false,new Date()),
+    //   new Todo(3,'learn to Ride',false,new Date())
+    // ]
 
-  // todos = [
-  //   {id :1 , description:'learn to Dance'},
-  //   {id :2 , description:'learn to Code'},
-  //   {id :3 , description:'learn to Ride'}
-  // ]
+  constructor(
+ private todoService:TodoDataService 
+ ) { }
 
+ ngOnInit() {
+  this.refreshTodos(); 
 
-  // todo = {
-  //   id :1,
-  //   description :'Learn to Code'
-
-  // }
-  constructor() { }
-
-  ngOnInit() {
+}
+refreshTodos(){
+this.todoService.getLoginData('dhananjay').subscribe(
+  response=>{
+    this.todos = response;
+    console.log(response);
   }
+)
+
+}
+
+deleteTodo(id){
+  this.todoService.deleteData('dhananjay',id).subscribe(
+    response=>{
+      console.log(response);
+      this.message = `Delete of Todo ${id} Successfull!`;
+      this.refreshTodos();
+
+    }
+
+  )
+  console.log(`Delete todo ${id}`);
+}
+
+
+upDateTodo(id){
+  console.log(`Update id ${id}`);
+}
+
+
+
 
 }
