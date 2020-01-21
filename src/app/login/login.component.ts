@@ -28,10 +28,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     console.log(1+2+"3");
-   
-
-
-
+  
     //console.log(this.username)
     //console.log(this.password)
     // if (this.username === "dhananjay" && this.password === 'dhananjay') {
