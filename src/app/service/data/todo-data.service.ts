@@ -9,21 +9,28 @@ import { Observable } from 'rxjs';
 export class TodoDataService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
-  
-  getLoginData(username): Observable<any>{
+
+  getLoginData(username): Observable<any> {
     return this.http.get<Todo[]>(`http://localhost:8080/users/'${username}'/todos`);
 
   }
 
-  deleteData(username,id):Observable<any>{
+  deleteData(username, id): Observable<any> {
     return this.http.delete<Todo[]>(`http://localhost:8080/users/${username}/todos/${id}`);
 
   }
-  
-  retriveTodo(username,id):Observable<any>{
+
+  retriveTodo(username, id): Observable<any> {
     return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
+
+  }
+
+  updateTodo(username, id, todo): Observable<any> {
+    return this.http.put(
+      `http://localhost:8080/users/${username}/todos/${id}`,
+       todo);
 
   }
 }

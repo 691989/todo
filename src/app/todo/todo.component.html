@@ -1,4 +1,6 @@
 <h2>Update Todo</h2>
+<div class="alert alert-success" *ngIf='updateMessage'>{{updateMessage}}</div>
+
 <div class="container">
 
         <fieldset class="form-group">
@@ -14,5 +16,5 @@
         class="form-control" name="targetDate" required="required">
     </fieldset>
 
-    <button class="btn btn-success" (click)="updateTodo()">Update</button>
+    <button class="btn btn-success" (click)="saveUpdateTodo()" >Save</button>
 </div>

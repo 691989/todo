@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
+import { Script } from 'vm';
 
-export class Todo{
+export class Todo {
   constructor(
-    public id : number,
-    public description : string,
-    public done : boolean,
-    public targetDate : Date
+    public id: number,
+    public description: string,
+    public done: boolean,
+    public targetDate: Date
 
-  ){ }
+  ) { }
 }
 
 @Component({
@@ -19,53 +20,57 @@ export class Todo{
 })
 export class ListComponent implements OnInit {
 
-    todos: Todo[]
-    message : string;
+  todos: Todo[]
+  deleteMessage: string;
+  updateMessage:string;
 
-    //   new Todo(1,'learn to Dance',false,new Date()),
-    //   new Todo(2,'learn to Code',false,new Date()),
-    //   new Todo(3,'learn to Ride',false,new Date())
-    // ]
+  //   new Todo(1,'learn to Dance',false,new Date()),
+  //   new Todo(2,'learn to Code',false,new Date()),
+  //   new Todo(3,'learn to Ride',false,new Date())
+  // ]
 
   constructor(
- private todoService:TodoDataService ,
- private router : Router
- ) { }
+    private todoService: TodoDataService,
+    private router: Router
+  ) { }
 
- ngOnInit() {
-  this.refreshTodos(); 
+  ngOnInit() {
+    this.refreshTodos();
 
-}
-refreshTodos(){
-this.todoService.getLoginData('dhananjay').subscribe(
-  response=>{
-    this.todos = response;
-    console.log(response);
   }
-)
+  refreshTodos() {
+    this.todoService.getLoginData('dhananjay').subscribe(
+      response => {
+        this.todos = response;
+        console.log(response);
+      }
+    )
 
-}
+  }
 
-deleteTodo(id){
-  this.todoService.deleteData('dhananjay',id).subscribe(
-    response=>{
-      console.log(response);
-      this.message = `Delete of Todo ${id} Successfull!`;
-      this.refreshTodos();
-
+  deleteTodo(id) {
+    
+    var txt;
+    if (confirm(`Do you really want to delete Todo ${id} records? This process cannot be undone.`)) {
+      txt = this.todoService.deleteData('dhananjay', id).subscribe(
+        response => {
+          console.log(response);
+          this.deleteMessage = `Todo ${id} Successfully Deleted!`;
+          this.refreshTodos();
+        }
+  
+      )
+    } else {
+      txt = "Cancelled!";
     }
 
-  )
-  console.log(`Delete todo ${id}`);
-}
+    console.log(`Delete todo ${id}`);
+  }
 
 
-upDateTodo(id){
-  console.log(`Update id ${id}`);
-  this.router.navigate(['todos',id])
-}
-
-
-
+  upDateTodo(id) {
+    console.log(`Update id ${id}`);
+    this.router.navigate(['todos', id])
+  }
 
 }
