@@ -1,12 +1,12 @@
+
 <h2>Todo's</h2>
 
 <div class="alert alert-success" *ngIf='deleteMessage'>{{deleteMessage}}</div>
-<div class="alert alert-success" *ngIf='updateMessage'>{{updateMessage}}</div>
 
+<div class="container pre-scrollable">
+    <button (click)="addTodo()" class="btn btn-success" >Add</button>
 
-
-<div class="container">
-<table class="table">
+    <table class="table table-hover">
 
     <thead>
         <tr>
@@ -29,8 +29,7 @@
 
             <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
         </tr>
-
-
     </tbody>
 </table>
+
 </div>

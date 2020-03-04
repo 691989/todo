@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
-import { Script } from 'vm';
+
 
 export class Todo {
   constructor(
@@ -73,4 +73,10 @@ export class ListComponent implements OnInit {
     this.router.navigate(['todos', id])
   }
 
+addTodo(){
+  console.log("Todo added");
+  this.router.navigate(['todos',-1])
+
+}
+  
 }

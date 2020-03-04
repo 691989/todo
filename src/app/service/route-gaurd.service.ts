@@ -6,7 +6,8 @@ import { HardcodedAuthenticationService } from './hardcoded-authentication.servi
   providedIn: 'root'
 })
 export class RouteGaurdService implements CanActivate {
-  //canActivate is an Interface that a class can implement to be a guard deciding if a route can be activated.
+  //canActivate is an Interface that
+  // a class can implement to be a guard deciding if a route can be activated.
 
   constructor(private hardcodedAuthenticationService: HardcodedAuthenticationService,private router:Router) {
 
